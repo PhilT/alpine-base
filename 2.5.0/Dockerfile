@@ -7,6 +7,7 @@ ENV RUBY_VERSION 2.5.0
 ENV RUBY_DOWNLOAD_SHA256 1da0afed833a0dab94075221a615c14487b05d0c407f991c8080d576d985b49b
 ENV RUBYGEMS_VERSION 2.7.3
 ENV BUNDLER_VERSION 1.16.1
+ENV RAKE_VERSION 12.3.0
 
 # skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
@@ -31,11 +32,11 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 RUN set -ex \
 	\
 	&& apk add --update --no-cache --virtual .ruby-builddeps \
-    openssh \
     autoconf \
     build-base \
     linux-headers \
     libressl-dev \
+    openssh \
     readline-dev \
     ruby \
     ruby-dev \
@@ -90,3 +91,4 @@ RUN set -ex \
 RUN gem update --system "$RUBYGEMS_VERSION"
 
 RUN gem install bundler --version "$BUNDLER_VERSION"
+RUN gem install rake --version "$RAKE_VERSION"

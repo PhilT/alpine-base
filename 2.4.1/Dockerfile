@@ -1,4 +1,4 @@
-FROM alpine-base
+FROM alpine:3.7
 LABEL maintainer "Phil Thompson - https://github.com/philt"
 CMD [ "irb" ]
 
@@ -6,7 +6,8 @@ ENV RUBY_MAJOR 2.4
 ENV RUBY_VERSION 2.4.1
 ENV RUBY_DOWNLOAD_SHA256 4fc8a9992de3e90191de369270ea4b6c1b171b7941743614cc50822ddc1fe654
 ENV RUBYGEMS_VERSION 2.7.3
-ENV BUNDLER_VERSION 1.16.0
+ENV BUNDLER_VERSION 1.16.1
+ENV RAKE_VERSION 12.3.0
 
 # skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
@@ -35,9 +36,12 @@ RUN set -ex \
     build-base \
     linux-headers \
     libressl-dev \
+    openssh \
     readline-dev \
     ruby \
     ruby-dev \
+    tar \
+    xz \
     zlib-dev \
 	\
 	&& wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" \
@@ -87,3 +91,4 @@ RUN set -ex \
 RUN gem update --system "$RUBYGEMS_VERSION"
 
 RUN gem install bundler --version "$BUNDLER_VERSION"
+RUN gem install rake --version "$RAKE_VERSION"
