@@ -36,7 +36,6 @@ RUN set -ex \
     build-base \
     linux-headers \
     libressl-dev \
-    openssh \
     readline-dev \
     ruby \
     ruby-dev \
@@ -81,8 +80,9 @@ RUN set -ex \
 		ca-certificates \
 		libffi-dev \
 		libressl-dev \
-		yaml-dev \
+    openssh-client \
 		procps \
+		yaml-dev \
 		zlib-dev \
 	&& apk del .ruby-builddeps \
 	&& cd / \
