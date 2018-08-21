@@ -78,6 +78,8 @@ RUN set -ex \
 	&& apk add --virtual .ruby-rundeps $runDeps \
 		bzip2 \
 		ca-certificates \
+    git \
+    less \
 		libffi-dev \
 		libressl-dev \
     openssh-client \
